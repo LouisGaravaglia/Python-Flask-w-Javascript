@@ -23,8 +23,10 @@ $("#lucky-form").on("submit", async function processForm(evt) {
     if (obj.errors.color) $("#color-err").text(obj.errors.color[0])
   
   } else {
-    data = await getLuckyResponse(year)
-    console.log(obj);
+    response = `Your lucky number is ${obj.num.num} (${obj.num.fact}).
+    Your birth year (${obj.year.year}) fact is ${obj.year.fact}.`
+
+    $("#lucky-results").text(response)
   }
   
 
