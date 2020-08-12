@@ -6,11 +6,15 @@
 <body>
 
 <form id="lucky-form">
-  <div>Name: <input id="name"> <b id="name-err"></b> </div>
-  <div>Birth Year: <input id="year"> <b id="year-err"></b> </div>
-  <div>Email: <input id="email"> <b id="email-err"></b> </div>
-  <div>Color: <input id="color"> <b id="color-err"></b> </div>
-  <button>I Want To Feel Lucky!</button>
+<label for="name">Name:</label>
+    <input type="text" placeholder="Add your name" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+ <label for="year">Year:</label>
+    <input type="text" placeholder="Add your birth year" class="form-control" id="year" name="year" aria-describedby="emailHelp">
+  <label for="email">Email:</label>
+    <input type="text" placeholder="Add your email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+<label for="color">Color:</label>
+    <input type="text" placeholder="Add your fav color" class="form-control" id="color" name="color" aria-describedby="emailHelp">
+  <button type="submit">I Want To Feel Lucky!</button>
 </form>
 
 <div id="lucky-results"></div>

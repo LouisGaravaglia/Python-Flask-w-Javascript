@@ -1,24 +1,56 @@
 /** processForm: get data from form and make AJAX call to our API. */
-alert("hi");
+$("#lucky-form").on("submit", async function processForm(evt) {
+  evt.preventDefault();
+  
 
-async function processForm(evt) {
-    evt.preventDefualt()
+  const name = $("#name").val();
+  const year = $("#year").val();
+  const email = $("#email").val();
+  const color = $("#color").val();
+ 
+  // if (!query) return;
 
-    $name = $("#name-err").val()
-    $year = $("#year-err").val()
-    $email = $("#email-err").val()
-    $color = $("#color-err").val()
+  // $("#episodes-area").hide();
+
+  const shows = await makeRequst(name, year, email, color);
+  // console.log(shows.data);
+
+});
+   
+// async function processForm(evt) {
+
+//     evt.preventDefualt()
+
+//     // $name = $("#name-err").val()
+//     // $year = $("#year-err").val()
+//     // $email = $("#email-err").val()
+//     // $color = $("#color-err").val()
+// alert("yo")
+//     $name = "hi"
+//     $year = "my year"
+//     $email = "my email"
+//     $color = "my color"
     
-    // const resp = await axios.post("/post-score", { name: $name, year: $year, email: $email, color: $color });
-    console.log($name, $year, $email, $color);
-    // handleResponse(resp)
-}
+//     const resp = await axios.post("/api/get-lucky-num", { name: $name, year: $year, email: $email, color: $color });
+//     console.log(resp);
+//     alert(resp)
+// }
 
 /** handleResponse: deal with response from our lucky-num API. */
 
-function handleResponse(resp) {
-    console.log(resp);
+async function makeRequest(name, year, email, color) {
+  const res = await axios.post("/api/get-lucky-num", { name: name, year: year, email: email, color: color });
+   
+  obj = res.data;
+
+  
+
+  // return [{
+  //   id: show.id,
+  //   name: show.name,
+  //   summary: show.summary,
+  //   image: show.image ? show.image.medium : missingImg
+  // }]
 }
 
-
-$("#lucky-form").on("submit", processForm);
+// $("#lucky-form").on("submit", processForm);
