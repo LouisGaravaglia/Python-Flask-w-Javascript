@@ -4,16 +4,23 @@ $("#lucky-form").on("submit", async function processForm(evt) {
   
 
   const name = $("#name").val();
-  const year = $("#year").val();
+  const yearString = $("#year").val();
   const email = $("#email").val();
   const color = $("#color").val();
+  const year = parseInt(yearString)
  
   // if (!query) return;
 
   // $("#episodes-area").hide();
 
   const obj = await makeRequest(name, year, email, color);
-  console.log(obj);
+  if (obj.errors) {
+    console.log(obj.errors);
+  } else {
+    console.log(obj);
+  }
+  
+
 
 });
    
