@@ -1,4 +1,6 @@
 import os
+import random 
+import requests
 from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
@@ -64,8 +66,8 @@ def result_page():
     if email == "" or email is None:
             errs.update({"email": ["This field is required."]})
      
-    if year > 2000 or year < 1900:
-            errs.update({"year": ["The year must be between 1900 and 2000."]})
+    # if year != None and year > 2000 or year != None and year < 1900:
+    #         errs.update({"year": ["The year must be between 1900 and 2000."]})
             
     if year == "" or year is None:
             errs.update({"year": ["This field is required."]})
@@ -96,4 +98,23 @@ def result_page():
     if errs:
         return {"errors": errs}
     else:
-        return jsonify(name=name, email=email, year=year, color=color) 
+        # return jsonify(year=year)
+        baseURL = "http://numbersapi.com"
+        randomNum = random.randint(0, 100) 
+
+        yearFact = requests.get(f"{baseURL}/{year}/year");
+        numberFact = requests.get(f"{baseURL}/{randomNum}");
+ 
+        obj = {"num": { "fact": numberFact.text, "num": randomNum  }, "year": { "fact": yearFact.text, "year": year  }}
+
+        return jsonify(obj)
+        # obj = {"num": { "fact": numberFact, "num": randomNum  }, year: { "fact": yearFact, "year": year  }}
+        # return obj
+        
+#         {
+#   "text": "42 is the number of gallons that one barrel of petroleum holds.",
+#   "number": 42,
+#   "found": true,
+#   "type": "trivia"
+# }
+        

@@ -14,11 +14,15 @@ $("#lucky-form").on("submit", async function processForm(evt) {
   // $("#episodes-area").hide();
 
   const obj = await makeRequest(name, year, email, color);
-  if (obj.errors) {
-    console.log(obj.errors);
-  } else {
-    console.log(obj);
-  }
+  console.log(obj);
+
+  // const obj = await makeRequest(name, year, email, color);
+  // if (obj.errors) {
+  //   console.log(obj.errors);
+  // } else {
+  //   data = await getLuckyResponse(year)
+  //   console.log(data[0]);
+  // }
   
 
 
@@ -60,6 +64,33 @@ async function makeRequest(name, year, email, color) {
   //   summary: show.summary,
   //   image: show.image ? show.image.medium : missingImg
   // }]
+}
+
+
+async function getLuckyResponse(respYear) {
+
+  const baseURL = "http://numbersapi.com"
+  const randomNum = Math.floor(Math.random() * 100) + 1
+
+  const yearFact = await axios.get(`${baseURL}/${respYear}/year`);
+  const numberFact = await axios.get(`${baseURL}/${randomNum}`);
+ 
+
+  obj = {num: { fact: numberFact, num: randomNum  }, year: { fact: yearFact, year: respYear  }}
+  return JSON.stringify(obj)
+
+// {
+//   "num": {
+//     "fact": "67 is the number of throws in Judo.",
+//     "num": 67
+//   },
+//   "year": {
+//     "fact": "1950 is the year that nothing remarkable happened.",
+//     "year": "1950"
+//   }
+// }
+
+
 }
 
 // $("#lucky-form").on("submit", processForm);
