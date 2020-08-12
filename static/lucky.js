@@ -12,8 +12,8 @@ $("#lucky-form").on("submit", async function processForm(evt) {
 
   // $("#episodes-area").hide();
 
-  const shows = await makeRequst(name, year, email, color);
-  // console.log(shows.data);
+  const obj = await makeRequest(name, year, email, color);
+  console.log(obj);
 
 });
    
@@ -42,6 +42,8 @@ async function makeRequest(name, year, email, color) {
   const res = await axios.post("/api/get-lucky-num", { name: name, year: year, email: email, color: color });
    
   obj = res.data;
+
+  return obj
 
   
 

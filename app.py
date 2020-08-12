@@ -44,36 +44,56 @@ def result_page():
     year = request.json["year"]
     color = request.json["color"]
 
-    return jsonify(name=name, email=email, year=year, color=color)
+    # return jsonify(name=name, email=email, year=year, color=color)
     
     # start_curr = request.form["converting-from"].upper()
     # end_curr = request.form["converting-to"].upper()
     # amount = request.form["amount"]
-    # errs = []
+    errs = {}
+    colors = ["Red", "Green", "Blue", "Orange", "red", "green", "orange", "blue", "RED", "GREEN", "ORANGE", "BLUE"]
+    
 
-    # if amount is None:
-    #     errs.append('"Not a valid amount.", "error"')
-        
-    # if not currency.check_currency_code(start_curr):
-    #     errs.append(f"Not a valid code: {start_curr}")
+    # if request.json["name"] == "" or request.json["name"] is None:
+    #     errs.update({"name": ["This field is required."]})
+    # else:
+    #     name = request.json["name"]
+    
+    if name == "" or name is None:
+            errs.update({"name": ["This field is required."]})
 
-    # if not currency.check_currency_code(end_curr):
-    #     errs.append(f"Not a valid code: {end_curr}")
-
+    if email == "" or email is None:
+            errs.update({"email": ["This field is required."]})
+     
+    if year > 2000 or year < 1900:
+            errs.update({"year": ["The year must be between 1900 and 2000."]})
+            
+    if year == "" or year is None:
+            errs.update({"year": ["This field is required."]})
+    
+    if color == "" or color is None:
+            errs.update({"email": ["This field is required."]})                   
+            
+    if color not in colors:
+            errs.update({"color": ["Invalid value, must be one of: red, green, orange, blue."]})   
 
     # if not errs:
     #     result = currency.convert(start_curr, end_curr, amount)
     #     if result is None:
     #         errs.append("Conversion failed.")
         
+    
+#     {
+#   "num": {
+#     "fact": "67 is the number of throws in Judo.",
+#     "num": 67
+#   },
+#   "year": {
+#     "fact": "1950 is the year that nothing remarkable happened.",
+#     "year": "1950"
+#   }
+# }
         
-    # if errs:
-    #     for err in errs:
-    #         flash(err)
-    #     return render_template("index.html",
-    #                            start_curr=start_curr,
-    #                            end_curr=end_curr,
-    #                            amount=amount or "")
-
-    # else:
-    #     return render_template("response.html", result=f"{result}")  
+    if errs:
+        return {"errors": errs}
+    else:
+        return jsonify(name=name, email=email, year=year, color=color) 
