@@ -14,15 +14,18 @@ $("#lucky-form").on("submit", async function processForm(evt) {
   // $("#episodes-area").hide();
 
   const obj = await makeRequest(name, year, email, color);
-  console.log(obj);
+ 
 
-  // const obj = await makeRequest(name, year, email, color);
-  // if (obj.errors) {
-  //   console.log(obj.errors);
-  // } else {
-  //   data = await getLuckyResponse(year)
-  //   console.log(data[0]);
-  // }
+  if (obj.errors) {
+    if (obj.errors.name) $("#name-err").text(obj.errors.name[0])
+    if (obj.errors.year) $("#year-err").text(obj.errors.year[0])
+    if (obj.errors.email) $("#email-err").text(obj.errors.email[0])
+    if (obj.errors.color) $("#color-err").text(obj.errors.color[0])
+  
+  } else {
+    data = await getLuckyResponse(year)
+    console.log(obj);
+  }
   
 
 

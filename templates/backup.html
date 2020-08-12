@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>LuckyNum</title>
+</head>
+<body>
+
+<form id="lucky-form">
+<label for="name">Name:</label>
+    <input type="text" placeholder="Add your name" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+ <label for="year">Year:</label>
+    <input type="text" placeholder="Add your birth year" class="form-control" id="year" name="year" aria-describedby="emailHelp">
+  <label for="email">Email:</label>
+    <input type="text" placeholder="Add your email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+<label for="color">Color:</label>
+    <input type="text" placeholder="Add your fav color" class="form-control" id="color" name="color" aria-describedby="emailHelp">
+  <button type="submit">I Want To Feel Lucky!</button>
+</form>
+
+<div id="lucky-results"></div>
+
+<script src="https://unpkg.com/jquery"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="/static/lucky.js"></script>
+
+</body>
+</html>
